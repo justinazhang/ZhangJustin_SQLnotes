@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context,DATABASE_NAME, null, DATABASE_Version);
        // SQLiteDatabase db=this.getWritableDatabase(); //for initial test of db creation
         Log.d("MyContactApp","DatabaseHelper: constructed DatabaseHelper");
+
     }
 
     @Override
@@ -39,19 +40,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("MyContactApp","DatabaseHelper: inserting data");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValue = new ContentValues();
-        ContentValues contentValue1 = new ContentValues();
-        ContentValues contentValue2 = new ContentValues();
         contentValue.put(COLUMN_NAME_CONTACT,name);
         contentValue.put(COLUMN_NAME_ADDRESS,home);
         contentValue.put(COLUMN_NAME_PHONE,phonum);
 
         long result = db.insert(TABLE_NAME, null, contentValue);
         if (result == -1){
-            Log.d("My contact app","Databasehelper:Contact insert- Failed");
+            Log.d("MyContactApp","Databasehelper:Contact insert- Failed");
             return false;
         }
         else{
-            Log.d("Mycontact app","Databasehelper: Contact insert-Passed");
+            Log.d("MyContactApp","Databasehelper: Contact insert-Passed");
             return true;
         }
     }
