@@ -2,6 +2,7 @@ package com.example.zhangj0585.mycontactapp1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -14,7 +15,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_CONTACT ="contact";
     public static final String COLUMN_NAME_ADDRESS ="address";
     public static final String COLUMN_NAME_PHONE ="phone";
-    public static final String SQL_CREATE_ENTRIES ="CREATE TABLE " + TABLE_NAME + " ("+ ID+" INTEGER PRIMARY KEY AUTOINCREMENT," + " TEXT)";
+    public static final String SQL_CREATE_ENTRIES =   "CREATE TABLE " + TABLE_NAME + " (" +
+            ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            COLUMN_NAME_CONTACT + " TEXT," +
+            COLUMN_NAME_ADDRESS + " TEXT," +
+            COLUMN_NAME_PHONE+ " TEXT)";
    public static final String SQL_DELETE_ENTRIES= "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     public DatabaseHelper(Context context) {
@@ -53,5 +58,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.d("MyContactApp","Databasehelper: Contact insert-Passed");
             return true;
         }
+    }
+    public Cursor getAllData(){
+        Log.d("MyContactApp","Databasehelper: Contact insert-Passed");
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+ TABLE_NAME, null);
+        return res;
     }
 }
